@@ -4,7 +4,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     
     // нет валидации ввода
-    $db = new SQLite3('database.db');
+    $db_path = '/var/www/html/data/database.db'; // Путь внутри контейнера
+    $db = new SQLite3($db_path);
+    if (!$db) {
+            die("Ошибка подключения к БД: " . $db->lastErrorMsg());
+    }
     
     // sql инъекция
     $result = $db->querySingle("SELECT username FROM users WHERE username = '$username'");

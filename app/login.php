@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
-    $db = new SQLite3('database.db');
+    $db_path = '/var/www/html/data/database.db';
     // sql инъекция
     $user = $db->querySingle("SELECT * FROM users WHERE username = '$username' AND password = '$password'", true);
     
